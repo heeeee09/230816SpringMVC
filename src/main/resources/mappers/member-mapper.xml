@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<!-- 별칭을 써야 resultMap에서 domain의 모든 경로가 아닌 별칭으로 줄여서 작성할 수 있다. -->
+
+	<insert id="insertMember">
+		INSERT INTO MEMBER_TBL VALUES(#{memberId },#{memberPw },#{memberName },#{memberAge },#{memberGender },#{memberEmail },#{memberPhone },#{memberAddress },#{memberHobby },DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="checkMemberLogin" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId } AND MEMBER_PW = #{memberPw }
+	</select>
+</mapper>  
