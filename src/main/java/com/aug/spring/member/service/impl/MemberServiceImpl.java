@@ -24,8 +24,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int updateMember(Member member) {
+		int result = mStore.updateMember(session, member);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(String memberId) {
+		int result = mStore.deleteMember(session, memberId);
+		return result;
+	}
+
+	@Override
 	public int checkMemberLogin(Member member) {
 		int result = mStore.checkMemberLogin(session, member);
+		return result;
+	}
+
+	@Override
+	public Member selectOneById(String memberId) {
+		Member result = mStore.selectOneById(session, memberId);
 		return result;
 	}
 
