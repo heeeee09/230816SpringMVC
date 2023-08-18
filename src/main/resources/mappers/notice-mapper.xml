@@ -20,4 +20,49 @@
 	<select id="selectNoticeList" resultMap="noticeResultMap">
 		SELECT * FROM NOTICE_TBL
 	</select>
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_TBL
+	</select>
+	<select id="selectListByKeywordCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_TBL
+		<if test="searchCondition == 'all'">
+			WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' OR NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' OR NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%'
+		</if> 
+		<if test="searchCondition == 'writer'">
+			WHERE NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' 
+		</if>
+		<if test="searchCondition == 'title'">
+			WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' 
+		</if>
+		<if test="searchCondition == 'content'">
+			WHERE NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%'
+		</if>		
+	</select>
+	<select id="selectNoticesByKeyword" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL
+		<if test="searchCondition == 'all'">
+			WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' OR NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' OR NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%'
+		</if> 
+		<if test="searchCondition == 'writer'">
+			WHERE NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' 
+		</if>
+		<if test="searchCondition == 'title'">
+			WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' 
+		</if>
+		<if test="searchCondition == 'content'">
+			WHERE NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%'
+		</if>
+	</select>
+<!-- 	<select id="selectNoticesByAll" resultMap="noticeResultMap"> -->
+<!-- 		SELECT * FROM NOTICE_TBL WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' OR NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' OR NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%' -->
+<!-- 	</select> -->
+<!-- 	<select id="selectNoticesByTitle" resultMap="noticeResultMap"> -->
+<!-- 		SELECT * FROM NOTICE_TBL WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' -->
+<!-- 	</select> -->
+<!-- 	<select id="selectNoticesByWriter" resultMap="noticeResultMap"> -->
+<!-- 		SELECT * FROM NOTICE_TBL WHERE NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' -->
+<!-- 	</select> -->
+<!-- 	<select id="selectNoticesByContent" resultMap="noticeResultMap"> -->
+<!-- 		SELECT * FROM NOTICE_TBL WHERE NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%' -->
+<!-- 	</select> -->
 </mapper>
