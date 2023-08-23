@@ -34,14 +34,22 @@
 				<c:forEach begin="1" end="10" var="notice" items="${nList }" varStatus="i">
 				<tr>
 					<td>${i.count }</td>
-					<td>${notice.noticeSubject }</td>
+					<!-- a링크에 적었던 값 중 value에는 ? 전의 값을 넣고
+						 c:param에는 ? 뒤의 값을 넣는다
+						 why? 긴 url을 하나의 번수로 만들어 사용하는 것
+					 -->
+<%--  					<td><a href="/notice/detail.do?noticeNo=${notice.noticeNo} }">${notice.noticeSubject }</a></td> --%>
+					<c:url var="detailUrl" value="/notice/detail.kh">
+						<c:param name="noticeNo" value="${notice.noticeNo}"></c:param>
+					</c:url>
+ 					<td><a href="${detailUrl }">${notice.noticeSubject }</a></td>
 					<td>${notice.noticeWriter }</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${notice.nCreateDate }"/>
 					</td>
 					<td>
-						<c:if test="${!empty notice.noticeFileName }">O</c:if>
-						<c:if test="${empty notice.noticeFileName }">X</c:if>
+						<c:if test="${!empty notice.noticeFileRename }">O</c:if>
+						<c:if test="${empty notice.noticeFileRename }">X</c:if>
 					</td>
 					<td>
 					<fmt:formatNumber pattern="##,###,###" value="123000"></fmt:formatNumber>
@@ -76,10 +84,15 @@
 						</form>		
 					</td>
 					<td>
-						<button>글쓰기</button>
+						<button type="button" onclick="showRegisterForm()">글쓰기</button>
 					</td>	
 				</tr>
 			</tfoot>
 		</table>
+		<script>
+			showRegisterForm = () => 
+				location.href="/notice/insert.kh";
+				
+		</script>
 	</body>
 </html>

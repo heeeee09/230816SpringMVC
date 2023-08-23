@@ -22,6 +22,12 @@ public class NoticeStoreLogic implements NoticeStore{
 	}
 	
 	@Override
+	public int updateNotice(SqlSession session, Notice notice) {
+		int result = session.update("NoticeMapper.updateNotice", notice);
+		return result;
+	}
+
+	@Override
 	public List<Notice> selectAllList(SqlSession session, PageInfo pInfo) {
 		int limit = pInfo.getRecordnaiCountPage();	// 한 페이지에 보여줄 글의 갯수(가져오는 행의 갯수)
 		int offset = (pInfo.getCurrentPage()-1)*limit;	// 
@@ -73,6 +79,12 @@ public class NoticeStoreLogic implements NoticeStore{
 	public int selectListCount(SqlSession session, Map<String, String> paramMap) {
 		int result = session.selectOne("NoticeMapper.selectListByKeywordCount", paramMap);
 		return result;
+	}
+
+	@Override
+	public Notice selecrNoticeByNo(SqlSession session, Integer noticeNo) {
+		Notice noticeOne = session.selectOne("NoticeMapper.selectNoticeBtNo", noticeNo);
+		return noticeOne;
 	}
 
 

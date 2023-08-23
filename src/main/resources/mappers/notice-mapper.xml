@@ -9,16 +9,20 @@
 		<result property="noticeContent" 	column="NOTICE_CONTENT"/>
 		<result property="noticeWriter" 	column="NOTICE_WRITER"/>
 		<result property="nCreateDate" 		column="N_CREATE_DATE"/>
-		<result property="nUpdateDate" 		column="N_UPDETE_DATE"/>
+		<result property="nUpdateDate" 		column="N_UPDATE_DATE"/>
 		<result property="noticeFileName" 	column="NOTICE_FILENAME"/>
+		<result property="noticeFileRename"	column="NOTICE_FILERENAME"/>
 		<result property="noticeFilepath" 	column="NOTICE_FILEPATH"/>
 		<result property="noticeFileLength" column="NOTICE_FILELENGTH"/>
 	</resultMap>
 	<insert id="insertNotice">
-		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeSubject}, #{noticeContent }, #{noticeWriter }, DEFAULT, DEFAULT, #{noticeFileName }, #{noticeFilepath }, #{noticeFileLength })
+		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeSubject}, #{noticeContent }, #{noticeWriter }, DEFAULT, DEFAULT, #{noticeFileName }, #{noticeFileRename }, #{noticeFilepath }, #{noticeFileLength })
 	</insert>
+	<update id="updateNotice">
+		UPDATE NOTICE_TBL SET NOTICE_SUBJECT=#{noticeSubject }, NOTICE_CONTENT=#{noticeContent }, N_UPDATE_DATE=DEFAULT, NOTICE_FILENAME=#{noticeFileName }, NOTICE_FILERENAME= #{noticeFileRename }, NOTICE_FILEPATH=#{noticeFilepath }, NOTICE_FILELENGTH=#{noticeFileLength } WHERE NOTICE_NO=#{noticeNo }
+	</update>
 	<select id="selectNoticeList" resultMap="noticeResultMap">
-		SELECT * FROM NOTICE_TBL
+		SELECT * FROM NOTICE_TBL ORDER BY N_UPDATE_DATE DESC
 	</select>
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE_TBL
@@ -52,6 +56,9 @@
 		<if test="searchCondition == 'content'">
 			WHERE NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%'
 		</if>
+	</select>
+	<select id="selectNoticeBtNo" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{value }
 	</select>
 <!-- 	<select id="selectNoticesByAll" resultMap="noticeResultMap"> -->
 <!-- 		SELECT * FROM NOTICE_TBL WHERE NOTICE_SUBJECT LIKE '%'||#{searchKeyword }||'%' OR NOTICE_WRITER LIKE '%'||#{searchKeyword }||'%' OR NOTICE_CONTENT LIKE '%'||#{searchKeyword }||'%' -->
