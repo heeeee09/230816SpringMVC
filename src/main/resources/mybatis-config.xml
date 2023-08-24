@@ -9,10 +9,12 @@
 	<typeAliases>
 		<typeAlias type="com.aug.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.aug.spring.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.aug.spring.board.domain.Board" alias="Board"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"></mapper>
 		<mapper resource="mappers/notice-mapper.xml"></mapper>
+		<mapper resource="mappers/board-mapper.xml"></mapper>
 	</mappers>
 </configuration>  
   

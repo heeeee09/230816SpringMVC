@@ -18,7 +18,12 @@
 		</c:if>
 		<c:if test="${memberId ne null }">
 			${memberId }님 환영합니다.<a href="/member/logout.kh">로그아웃</a>
-			<a href="/member/myPage.kh?memberId=${memberId }">마이페이지</a>
+			<form action="/member/myPage.kh" method="post">
+<%-- 				<input type="hidden" name="memberId" value="${memberId }"> --%>
+				<button tyep="submit" value="마이페이지">마이페이지</button>
+			</form>
+<%-- 			<a href="/member/myPage.kh?memberId=${memberId }">마이페이지</a> --%>
+				<!-- ?뒤의 쿼리스트링을 쓸 필요가 없어짐(세션에서 꺼내왔으니까) -->
 		</c:if>
 	</body>
 </html>

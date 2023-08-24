@@ -9,3 +9,6 @@ table {
 th, td {
 	border : 1px solid black;
 }
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+}

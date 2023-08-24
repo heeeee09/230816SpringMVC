@@ -153,16 +153,23 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/member/myPage.kh", method = RequestMethod.GET)
+	@RequestMapping(value="/member/myPage.kh", method = RequestMethod.POST)
 	public String memberMyPage(
-			@ModelAttribute Member member
-			, HttpSession session
+			HttpSession session
 			, Model model
 			) {
-		Member mOne = service.selectOneById(member.getMemberId());
-		if(mOne != null) {
-			model.addAttribute("member", mOne);
-			return "member/myPage";
+		String memberId = (String)session.getAttribute("memberId");
+		if(memberId != "" && memberId != null) {
+			Member mOne = service.selectOneById(memberId);
+			if(mOne != null) {
+				model.addAttribute("member", mOne);
+				return "member/myPage";
+			}else {
+				model.addAttribute("error", "데이터를 조회하지 못했습니다.");
+				model.addAttribute("msg", "마이페이지 조회 실패");
+				model.addAttribute("url", "/index.jsp");
+				return "common/erroePage";
+			}
 		}else {
 			model.addAttribute("error", "데이터를 조회하지 못했습니다.");
 			model.addAttribute("msg", "마이페이지 조회 실패");

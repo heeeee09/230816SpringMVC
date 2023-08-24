@@ -12,13 +12,14 @@ public class Notice {
 	private String noticeFileName;
 	private String noticeFileRename;
 	private String noticeFilepath;
+	private long noticeFileLength;
+	
 	public String getNoticeFileRename() {
 		return noticeFileRename;
 	}
 	public void setNoticeFileRename(String noticeFileRename) {
 		this.noticeFileRename = noticeFileRename;
 	}
-	private long noticeFileLength;
 	
 	public int getNoticeNo() {
 		return noticeNo;
