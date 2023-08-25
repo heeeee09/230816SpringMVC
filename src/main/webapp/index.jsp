@@ -22,6 +22,7 @@
 <%-- 				<input type="hidden" name="memberId" value="${memberId }"> --%>
 				<button tyep="submit" value="마이페이지">마이페이지</button>
 			</form>
+			<a href="/board/list.kh">게시판</a>
 <%-- 			<a href="/member/myPage.kh?memberId=${memberId }">마이페이지</a> --%>
 				<!-- ?뒤의 쿼리스트링을 쓸 필요가 없어짐(세션에서 꺼내왔으니까) -->
 		</c:if>

@@ -9,6 +9,7 @@
 	<body>
 		<h1>${msg }</h1>
 		<a href="${url }">페이지 이동</a>
+		<a href="/index.jsp">메인으로 이동</a>
 		
 	<script>
 		const msg = "${msg }";

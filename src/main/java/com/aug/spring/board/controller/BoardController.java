@@ -22,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aug.spring.board.domain.Board;
 import com.aug.spring.board.domain.PageInfo;
+import com.aug.spring.board.domain.Reply;
 import com.aug.spring.board.service.BoardService;
+import com.aug.spring.board.service.ReplyService;
 
 
 @Controller
@@ -30,6 +32,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private ReplyService rService;
 	
 	@RequestMapping(value="/board/list.kh", method = RequestMethod.GET)
 	public ModelAndView showBoardList(
@@ -52,6 +56,10 @@ public class BoardController {
 			, @ModelAttribute Board board) {
 		Board bPost = bService.selectOneBoardByNo(board.getBoardNo());
 		if(bPost != null) {
+			List<Reply> replyList = rService.selectReplyList(board.getBoardNo());
+			if(replyList.size() > 0) {
+				mv.addObject("rList", replyList);
+			}
 			mv.addObject("board", bPost).setViewName("board/detail");
 		} else {
 			mv.addObject("msg", "게시글 조회가 완료되지 않았습니다.");
