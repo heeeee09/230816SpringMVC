@@ -95,7 +95,7 @@
 							<td colspan="3" ><input id="replyContent" type="text" size="50" name="replyContent" value="${reply.replyContent }"></td>
 							<!-- 함수에 매개변수 넘겼는지 확인 -->
 							${reply.replyNo}
-							<td><input type="button" onclick="replyModify('this, ${reply.replyNo}, ${reply.refBoardNo }')" value="완료"></td>
+							<td><input type="button" onclick="replyModify(this, ${reply.replyNo}, ${reply.refBoardNo })" value="완료"></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -129,6 +129,7 @@
 				hInput2.type="hidden";
 				hInput2.value=refBoardNo;
 				hInput2.name="refBoardNo";
+// 				console.log(hInput2); -> refBoardNo의 값을 못가져와서 value가 undefined뜸
 
 				// 수정할 것 입력하는 input 만들기(replyContent를 가지고 있어야 함)
 				const inputTag = document.createElement("input");
@@ -144,24 +145,7 @@
 				console.log(formTag);
 				
 				document.body.appendChild(formTag);
-// 				formTag.submit();				
-				
-// 				tdTag1.appendChild(inputTag);
-// 				// input태그를 가진 td 만들기
-// 				const tdTag1 = document.createElement("td");
-// 				tdTag1.colspan="3";
-// 				// 버튼 넣을 td 만들기
-// 				const tdTag2 = document.createElement("td");
-// 				// submit할 input 만들기
-// 				const submitTag = document.createElement("input");
-// 				submitTag.type="submit";
-// 				value="수정";
-// 				tdTag2.appendChild(submitTag);
-				
-// 				// 폼태그 넣을 tr 태그 넣기
-// 				const trTag = document.createElement("tr");
-// 				trTag.appendChild(formTag);
-// 				console.log(trTag);
+				formTag.submit();				
 				
 				
 				
@@ -191,14 +175,14 @@
 			// 만든 것(trTag)을 추가하기 
 			// 클릭한 a를 포함하고 있는 tr 다음에 수정폼이 있는 tr 추가하기
 			// prevTrTag의 위치는 obj의(function의 위치) 부모의 부모
-// 			const prevTrTag = obj.parentElement.parentElement;
+			const prevTrTag = obj.parentElement.parentElement;
 // // 			// insertBefore() : 부모노드의 기준 점 노드 앞에 삽입할 노드를 넣는다.
 // // 			// 								(삽입할 노드, 기준 점 노드)
 // // 			prevTrTag.parentNode.insertBefore(trTag, prevTrTag.nextSibling);
 			
-// 			if(prevTrTag.nextElementSibling == null || !prevTrTag.nextElementSibling.querySelector("input")){
-// 				prevTrTag.parentNode.insertBefore(trTag, prevTrTag.nextSibling);
-// 			}
+			if(prevTrTag.nextElementSibling == null || !prevTrTag.nextElementSibling.querySelector("input")){
+				prevTrTag.parentNode.insertBefore(trTag, prevTrTag.nextSibling);
+			}
 			}
 		</script>
 	</body>
