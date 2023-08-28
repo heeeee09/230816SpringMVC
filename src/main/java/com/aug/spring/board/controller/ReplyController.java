@@ -81,4 +81,13 @@ public class ReplyController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value="/delete.kh", method = RequestMethod.POST)
+	public ModelAndView deleteReply(ModelAndView mv
+			, @ModelAttribute Reply reply
+			) {
+		
+		return mv;
+	}
+	
 }

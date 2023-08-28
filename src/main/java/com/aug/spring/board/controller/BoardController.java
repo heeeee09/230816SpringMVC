@@ -101,7 +101,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/write.kh", method = RequestMethod.POST)
-	public ModelAndView boardRegister(
+	public ModelAndView boardInsert(
 			ModelAndView mv
 			, @RequestParam(value="uploadFile", required = false) MultipartFile uploadFile
 			, @ModelAttribute Board board

@@ -76,7 +76,7 @@
 							 <!-- 댓글 내용을 전달값으로 보내기, '' -> 오류방지 -->
 <%-- 							<a href="javascript:void(0)" onclick="showModifyForm(this, '${reply.replyContent}')" >수정하기</a> --%>
 							<a href="javascript:void(0)" onclick="showModifyForm(this)">수정하기</a>
-							<a href="#">삭제하기</a>
+							<a href="javascript:void(0)" onclick="deleteReply(${reply.replyNo})">삭제하기</a>
 						</td>
 					</tr>
 					<!-- 1. html로 해보기 -->
@@ -94,8 +94,7 @@
 							<!-- 실제로 가져오는 값이어서 꼭 있어야 함 -->
 							<td colspan="3" ><input id="replyContent" type="text" size="50" name="replyContent" value="${reply.replyContent }"></td>
 							<!-- 함수에 매개변수 넘겼는지 확인 -->
-							${reply.replyNo}
-							<td><input type="button" onclick="replyModify(this, ${reply.replyNo}, ${reply.refBoardNo })" value="완료"></td>
+							<td><input type="button" onclick="replyModify(this, '${reply.replyNo}', '${reply.refBoardNo }')" value="완료"></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -113,6 +112,12 @@
 			// #1. html태그, display:none 사용하는 방법
 //	 		// obj의 부모의    부모의		다음
 	 		obj.parentElement.parentElement.nextElementSibling.style.display="";
+			}
+			
+			function deleteReply(replyNo){
+				if(confirm("정말 삭제하시겠습니까?")){
+					location.href="/reply/delete.kh?"+replyNo;									
+				}
 			}
 			
 			function replyModify(obj, replyNo, refBoardNo){
@@ -137,7 +142,10 @@
 				inputTag.size="50";
 				inputTag.name="replyContent";
 				// 여기 this로 수정하기...
-				inputTag.value=document.querySelector("#replyContent").value;
+// 				inputTag.value=document.querySelector("#replyContent").value;
+				//this를 이용해서 내가 원하는 노드 찾기
+				inputTag.value=obj.parentElement.previousElementSibling.childNodes[0].value;
+// 				inputTag.value=obj.parentElement.previousElementSibling.children[0].value;
 				formTag.appendChild(hInput1);
 				formTag.appendChild(hInput2);
 				formTag.appendChild(inputTag);
