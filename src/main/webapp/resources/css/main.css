@@ -21,3 +21,10 @@ button {
 body {
 	font-family: 'Nanum Gothic', sans-serif;
 }
+input, textarea {
+	font-family: 'Nanum Gothic', sans-serif;
+	padding : 5px;
+}
+button {
+	border-radius: 10px;
+}

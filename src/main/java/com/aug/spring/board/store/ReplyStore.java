@@ -32,4 +32,12 @@ public interface ReplyStore {
 	 */
 	List<Reply> selecrReplyList(SqlSession session, int boardNo);
 
+	/**
+	 * 댓글 삭제 store
+	 * @param session
+	 * @param reply
+	 * @return
+	 */
+	int deleteReply(SqlSession session, Reply reply);
+
 }

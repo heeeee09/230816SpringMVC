@@ -3,9 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!-- 	<settings> -->
-<!-- 		<setting name="" value=""/> -->
-<!-- 	</settings> -->
+	<!-- NULL일 경우 NULL로 들어가게 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" /> 
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.aug.spring.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.aug.spring.notice.domain.Notice" alias="Notice"/>

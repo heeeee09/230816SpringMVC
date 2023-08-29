@@ -36,8 +36,19 @@
 					</c:if>
 				</li>
 			</ul>
+			<c:url var="boardDelUrl"  value="/board/delete.kh">
+				<c:param name="boardNo"  value="${board.boardNo }"></c:param>
+				<c:param name="boardWriter"  value="${board.boardWriter }"></c:param>
+			</c:url>
+			<c:url var="boardModify" value="/board/modify.kh">
+				<c:param name="boardNo"  value="${board.boardNo }"></c:param>
+				<c:param name="boardWriter"  value="${board.boardWriter }"></c:param>
+			</c:url>
 			<div>
-				<button type="button" onclick="showModifyPage();">수정하기</button>
+				<c:if test="${board.boardWriter eq memberId}">
+					<button type="button" onclick="showModifyPage('${boardModify }');">수정하기</button>
+				</c:if>
+				<button type="button" onclick="deleteBoard('${boardDelUrl }');">삭제하기</button>
 				<button type="button" onclick="showNoticeList();">목록으로 이동</button>
 			</div> 
 			<!-- 댓글 등록 -->
@@ -76,7 +87,13 @@
 							 <!-- 댓글 내용을 전달값으로 보내기, '' -> 오류방지 -->
 <%-- 							<a href="javascript:void(0)" onclick="showModifyForm(this, '${reply.replyContent}')" >수정하기</a> --%>
 							<a href="javascript:void(0)" onclick="showModifyForm(this)">수정하기</a>
-							<a href="javascript:void(0)" onclick="deleteReply(${reply.replyNo})">삭제하기</a>
+							<c:url var="delUrl" value="/reply/delete.kh">
+								<c:param name="replyNo" value="${reply.replyNo }"></c:param>
+								<!-- 내 것만 지우기 위해 replyWrier 추가함 -->
+								<c:param name="replyWriter" value="${reply.replyWriter }"></c:param>
+								<c:param name="refBoardNo" value="${reply.refBoardNo }"></c:param>
+							</c:url>
+							<a href="javascript:void(0)" onclick="deleteReply('${delUrl}');">삭제하기</a>
 						</td>
 					</tr>
 					<!-- 1. html로 해보기 -->
@@ -114,9 +131,33 @@
 	 		obj.parentElement.parentElement.nextElementSibling.style.display="";
 			}
 			
-			function deleteReply(replyNo){
+			showModifyPage = (url) => {
+				const memberId = "${memberId }"
+				const boardWriter = "${board.boardWriter}"
+				if(memberId == boardWriter) {
+						location.href=url;
+				} else {
+					alert("내가 쓴 게시글만 수정할 수 있습니다.")
+				}		
+			}
+			
+			deleteBoard = (url) => {
+				const memberId = "${memberId }"
+				const boardWriter = "${board.boardWriter}"
+				if(memberId == boardWriter) {
+					if(confirm("정말 삭제하시겠습니까?")){
+						location.href=url;
+					}
+				} else {
+					alert("내가 쓴 게시글만 삭제할 수 있습니다.");
+				}
+			}
+			
+				
+			function deleteReply(url){
+// 					location.href="/reply/delete.kh?"+replyNo;									
 				if(confirm("정말 삭제하시겠습니까?")){
-					location.href="/reply/delete.kh?"+replyNo;									
+					location.href=url;
 				}
 			}
 			

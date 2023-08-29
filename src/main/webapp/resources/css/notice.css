@@ -12,3 +12,12 @@ th, td {
 body {
 	font-family: 'Nanum Gothic', sans-serif;
 }
+thead {
+	height: 50px;
+}
+#homeBtn {
+	border: 0px;
+	background-color : none;
+	width: 200px;
+	cursor: !improtant;
+}

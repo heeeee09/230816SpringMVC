@@ -5,7 +5,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="/resources/css/main.css">
+		<link rel="stylesheet" href="../resources/css/main.css">
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		<title>회원 정보 수정</title>
 	</head>
 	<body>

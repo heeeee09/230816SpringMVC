@@ -4,6 +4,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../resources/css/main.css">
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		<title>게시글 등록</title>
 	</head>
 	<body>
@@ -16,7 +18,8 @@
 				</li>
 				<li>
 					<label>작성자</label>
-					<input type="text" name="boardWriter">
+<%-- 					<input type="text" name="boardWriter" value="${memberId }" readonly> --%>
+					<span>${memberId }</span>
 				</li>
 				<li>
 					<label>내용</label>

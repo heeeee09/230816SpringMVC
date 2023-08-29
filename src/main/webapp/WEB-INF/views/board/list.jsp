@@ -11,14 +11,15 @@
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		<a href="/index.jsp"><button id="homeBtn">Home</button></a>
 		<h1>게시글 목록</h1>
 		<table>
 			<colgroup>
 				<col width="10%">
-				<col width="55%">
-				<col width="10%">
+				<col width="45%">
 				<col width="15%">
-				<col width="10%">
+				<col width="20%">
+				<col width="20%">
 			</colgroup>
 			<thead>
 				<tr>
@@ -51,9 +52,6 @@
 					<td>
 						<c:if test="${!empty board.boardFileRename }">O</c:if>
 						<c:if test="${empty board.boardFileRename }">X</c:if>
-					</td>
-					<td>
-					<fmt:formatNumber pattern="##,###,###" value="123000"></fmt:formatNumber>
 					</td>
 				</tr>
 				</c:forEach>
@@ -103,7 +101,7 @@
 		</table>
 		<script>
 			showRegisterForm = () => 
-				location.href="/board/insert.kh";
+				location.href="/board/write.kh";
 				
 		</script>
 	</body>

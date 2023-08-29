@@ -20,15 +20,20 @@
 	<insert id="insertBoard">
 		INSERT INTO BOARD_TBL VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardTitle }, #{boardContent }, #{boardWriter }, #{boardFileName }, #{boardFileRename }, #{boardFilePath }, #{boardFileLength }, 0, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
-	
+	<update id="updateBoard">
+		UPDATE BOARD_TBL SET BOARD_TITLE = #{boardTitle }, BOARD_CONTENT = #{boardContent }, BOARD_FILENAME=#{boardFileName }, BOARD_FILERENAME=#{boardFileRename }, BOARD_FILEPATH=#{boardFilePath }, BOARD_FILELENGTH=#{boardFileLength }, B_UPDATE_DATE = DEFAULT
+	</update>
+	<delete id="deleteBoard">
+		DELETE BOARD_TBL WHERE BOARD_NO = #{boardNo } AND BOARD_WRITER=#{boardWriter }
+	</delete>
 	<select id="selecetListCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD_TBL
+		SELECT COUNT(*) FROM BOARD_TBL WHERE B_STATUS = 'Y'
 	</select>
 	<select id="selectBoardList" resultMap="boardResultMap">
-		SELECT * FROM BOARD_TBL ORDER BY B_UPDATE_DATE DESC
+		SELECT * FROM BOARD_TBL WHERE B_STATUS = 'Y' ORDER BY B_UPDATE_DATE DESC
 	</select>	
 	<select id="selectOneBoardByNo" resultMap="boardResultMap">
-		SELECT * FROM BOARD_TBL WHERE BOARD_NO=#{boardNo }
+		SELECT * FROM BOARD_TBL WHERE BOARD_NO=#{boardNo } AND B_STATUS = 'Y'
 	</select>
 
 </mapper>  

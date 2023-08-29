@@ -27,4 +27,11 @@ public interface ReplyService {
 	 */
 	List<Reply> selectReplyList(int boardNo);
 
+	/**
+	 * 댓글 삭제 service
+	 * @param reply
+	 * @return
+	 */
+	int deleteReply(Reply reply);
+
 }
